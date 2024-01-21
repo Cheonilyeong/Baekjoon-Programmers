@@ -6,9 +6,7 @@ int a, b;
 
 int main(void) {
     ios::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-    while(1) {
-        cin >> a >> b;
-        if(cin.eof() == true) break;
+    while(cin >> a >> b) {
         cout << a + b << '\n';
     }
 }
