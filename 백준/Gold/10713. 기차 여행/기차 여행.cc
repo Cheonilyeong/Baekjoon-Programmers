@@ -7,8 +7,8 @@ typedef struct {
     int C;
 }city;
 
-int N, M, a, cnt[100004];
-long long ret;
+int N, M, a;
+long long ret, cnt[100004], psum[100004];;
 city c;
 vector<int> P;
 vector<city> C;
@@ -31,22 +31,19 @@ int main(void) {
 
     // 각 도시 방문 횟수 조회
     for(int i = 0; i < M-1; i++) {
-        if(P[i] > P[i+1]) {
-            for(int j = P[i]; j > P[i+1]; j--) {
-                cnt[j-1]++;
-            }
-        }
-        if(P[i] < P[i+1]) {
-            for(int j = P[i]; j < P[i+1]; j++) {
-                cnt[j]++;
-            }
-        }
+        int from = P[i];
+        int to = P[i+1];
+        if(from > to) swap(from,to);
+        cnt[from]++;
+        cnt[to]--;
     }
-    
+    for(int i = 0; i < N; i++) {
+        psum[i] = psum[i-1] + cnt[i];
+    }
+
     // 계산
     for(int i = 0; i < N-1; i++) {
-        //cout << C[i].A << ' ' << C[i].B << ' ' << C[i].C << ' ' << cnt[i] << '\n';
-        ret += min(C[i].A * cnt[i], C[i].C + cnt[i] * C[i].B);
+        ret += min(C[i].A * psum[i], C[i].C + psum[i] * C[i].B);
     }
 
     cout << ret;
