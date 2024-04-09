@@ -16,7 +16,6 @@ int main(void) {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
     cin >> a >> b;
-    if(a > b) swap(a,b);
 
     cout << gcd(a,b) << '\n';
     cout << lcm(a,b) << '\n';
