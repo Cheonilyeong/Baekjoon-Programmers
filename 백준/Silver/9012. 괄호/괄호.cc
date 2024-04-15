@@ -1,25 +1,43 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <stack>
+#include <cstring>
 using namespace std;
 
-int T;
-string s;
-
-int main(void) {
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
-    cin >> T;
-
-    while(T--) {
-        cin >> s;
-
-        stack<char> st;
-        for(char c : s) {
-            if(st.empty()) st.push(c);
-            else if(st.top()=='(' && c==')') st.pop();
-            else st.push(c);
+int main(){
+    stack<char> vps;
+    int count;
+    cin >> count;
+    char str[50];
+    int print[count];
+    for(int i = 0; i < count; i++){
+        scanf("%s", str);
+        while(!vps.empty())
+            vps.pop();
+        for(char a : str){
+            //cout << a;
+            if(a == '(')
+                vps.push(a);
+            else if(a == ')'){
+                if(!vps.empty() && vps.top() == '(')
+                    vps.pop();
+                else
+                    vps.push(a);
+            }
         }
-
-        if(st.size()) cout << "NO\n";
-        else cout << "YES\n";
+        if(vps.empty())
+            print[i] = 1;
+        else
+            print[i] = 0;
+        fill(&str[0], &str[50], '\0');
+        //cout << '\n';
     }
+
+
+    for(int a : print){
+        if(a)
+            cout << "YES" << endl;
+        else
+            cout << "NO" << endl;
+    }
+    return 0;
 }
