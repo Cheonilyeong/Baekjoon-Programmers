@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
 
     val N = br.readLine().toInt();
 
-    val arr = ArrayList<String>();
+    val arr = mutableListOf<String>();
     val set = HashSet<String>();
 
     (1..N).forEach() {
