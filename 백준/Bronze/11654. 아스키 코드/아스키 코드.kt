@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     //val br = BufferedReader(InputStreamReader(System.`in`));
     val bw = BufferedWriter(OutputStreamWriter(System.out));
 
-    println(readLine()!!.first().toInt());
+    println(readLine()!![0].toInt());
 
     //br.close();
     bw.flush();
