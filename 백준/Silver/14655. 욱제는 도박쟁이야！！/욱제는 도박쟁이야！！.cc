@@ -11,10 +11,6 @@ int main(void) {
         cin >> num;
         sum += abs(num);
     }
-    for(int i = 0; i < N; i++) {
-        cin >> num;
-        sum += abs(num);
-    }
-
-    cout << sum;
+    cout << sum*2;
+    return 0;
 }
