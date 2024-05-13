@@ -17,11 +17,13 @@ void dfs(int y, int x) {
         if(visited[ny][nx]) continue;
         
         // (y,x) -> (ny,nx)
+        // (y,x)에서 진행방향으로 (ny,nx)로 도착하는 경우
         if(mp[y][x]==dir[i]) {
             visited[ny][nx] = 1;
             dfs(ny,nx);
         }
         // (ny,nx) -> (y,x)
+        // (ny,nx)에서 진행방향으로 (y,x)로 도착하는 경우
         else if(mp[ny][nx]==dir[(i+2)%4]) {
             visited[ny][nx] = 1;
             dfs(ny,nx);
@@ -40,12 +42,13 @@ int main(void) {
             cin >> mp[i][j];
         }
     }
-
+		// 그래프 탐색
     for(int i = 0; i < N; i++) {
         for(int j = 0; j < M; j++) {
             if(visited[i][j]) continue;
+            // 하나의 집합을 방문처리하고 ret++
+            visited[i][j] = 1, ret++;
             dfs(i,j);
-            ret++;
         }
     }
 
