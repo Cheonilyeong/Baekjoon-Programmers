@@ -2,7 +2,6 @@
 using namespace std;
 
 int N, M, num;
-map<int,int> mp;
 vector<int> v;
 
 int main(void) {
@@ -10,25 +9,24 @@ int main(void) {
 
     cin >> N >> M;
 
-    v.resize(N);
     // 배열받기
+    v.resize(N);
     for(int i = 0; i < N; i++) {
         cin >> v[i];
     }
     sort(v.begin(), v.end());
 
-    // mp에 처음나온 위치 넣기
-    for(int i = N-1; i >= 0; i--) {
-        mp[v[i]] = i;
-    }
-
     // 질문받기
     for(int i = 0; i < M; i++) {
         cin >> num;
 
-        if(mp.find(num) == mp.end()) {
-            cout << -1 << '\n';
+        int idx = lower_bound(v.begin(), v.end(), num) - v.begin();
+
+        if(idx < N && v[idx] == num) {
+            cout << idx << '\n';
         }
-        else cout << mp[num] << '\n';
+        else {
+            cout << -1 << '\n';
+        }      
     }
 }
