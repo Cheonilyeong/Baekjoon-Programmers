@@ -3,7 +3,6 @@ using namespace std;
 #define ll long long
 
 ll x, y;
-set<pair<ll,ll>> visited;
 
 ll pow(ll a, ll b) {
     ll result = 1;
@@ -21,7 +20,6 @@ int main(void) {
 
     queue<tuple<ll,ll,ll>> q;
     q.push({0,0,0});
-    visited.insert({0,0});
 
     bool flag = false;
     while(q.size()) {
@@ -39,20 +37,14 @@ int main(void) {
         ll nextX = nowX + pow(3,k);
         ll nextY = nowY;
         if(nextX <= x && nextY <= y) {
-            if(visited.find({nextX, nextY}) == visited.end()) {
-                visited.insert({nextX, nextY});
-                q.push({nextX, nextY, k+1});
-            }
+            q.push({nextX, nextY, k+1});    
         }
 
         // y좌표 증가
         nextX = nowX;
         nextY = nowY + pow(3,k);
         if(nextX <= x && nextY <= y) {
-            if(visited.find({nextX, nextY}) == visited.end()) {
-                visited.insert({nextX, nextY});
-                q.push({nextX, nextY, k+1});
-            }
+            q.push({nextX, nextY, k+1});
         }
     }
 
