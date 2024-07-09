@@ -3,6 +3,7 @@ import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import kotlin.math.ceil
+import kotlin.math.round
 
 fun main() {
     val br = BufferedReader(InputStreamReader(System.`in`))
@@ -32,8 +33,8 @@ fun main() {
         dp[i][1] = (dp[i-1][0]*HS) + (dp[i-1][1]*SS)
     }
 
-    println("${ceil(dp[N][0]*1000).toInt()}")
-    println("${ceil(dp[N][1]*1000).toInt()}")
+    println("${round(dp[N][0]*1000).toInt()}")
+    println("${round(dp[N][1]*1000).toInt()}")
 
     br.close()
     bw.flush()
