@@ -19,11 +19,10 @@ int main() {
 
     int cnt = 0;
     int ret = 0;
-    int index = N-1;
-    while(true) {
+    
+    for(int i = N-1; i >= 0; i--) {
         if(cnt >= M*K) break;
-        if(index == -1) break;
-        cnt += pens[index--];
+        cnt += pens[i];
         ret++;
     }
 
