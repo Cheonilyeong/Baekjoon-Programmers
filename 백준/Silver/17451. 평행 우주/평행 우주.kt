@@ -26,4 +26,4 @@ fun main() {
     bw.close()
 }
 
-fun findSpeed(num: Long, min: Long) = (min + num - 1) / num * num
+fun findSpeed(num: Long, min: Long) = if(min % num == 0L) min else min + (num - min%num) 
