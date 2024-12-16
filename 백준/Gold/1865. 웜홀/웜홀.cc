@@ -56,7 +56,7 @@ int main() {
                     long long d = it.second;
                     int to = it.first;
 
-                    if(dist[here] != INF && dist[here] + d < dist[to]) {
+                    if(dist[here] + d < dist[to]) {
                         if(i == N-1) ret = true;
                         dist[to] = dist[here] + d;
                     }
