@@ -2,10 +2,10 @@
 
 using namespace std;
 
-const int INF = 1e9;
+const long long INF = 1e9;
 
 int TC, N, M, W, S, E, T;
-int adj[504][504];
+long long adj1[504][504], dist[504];
 bool ret;
 
 int main() {
@@ -16,20 +16,17 @@ int main() {
         
         cin >> N >> M >> W;
 
-        fill(&adj[0][0], &adj[0][0] + 504*504, INF);
+        fill(&adj1[0][0], &adj1[0][0] + 504 * 504, INF);
+        memset(dist, 0, sizeof(dist));
         ret = false;
-
-        for(int i = 0; i < 504; i++) {
-            adj[i][i] = 0;
-        }
 
         // M
         for(int i = 0; i < M; i++) {
             cin >> S >> E >> T;
             
-            if(adj[S][E] == INF || adj[S][E] > T) {
-                adj[S][E] = T;
-                adj[E][S] = T;
+            if(adj1[S][E] == INF || adj1[S][E] > T) {
+                adj1[S][E] = T;
+                adj1[E][S] = T;
             }
         }
 
@@ -37,25 +34,36 @@ int main() {
         for(int i = 0; i < W; i++) {
             cin >> S >> E >> T;
             
-            if(adj[S][E] == INF || adj[S][E] > -T) {
-                adj[S][E] = -T;
+            if(adj1[S][E] == INF || adj1[S][E] > -T) {
+                adj1[S][E] = -T;
             }
         }
 
-        // 플로이드 워셜
-        for(int m = 1; m <= N; m++) {
-            for(int s = 1; s <= N; s++) {
-                for(int e = 1; e <= N; e++) {
-                    adj[s][e] = min(adj[s][e], adj[s][m] + adj[m][e]);
+        // d
+        vector<vector<pair<int,int>>> adj2(N+1);
+        for(int i = 1; i <= N; i++) {
+            for(int j = 1; j <= N; j++) {
+                if(adj1[i][j] != INF) {
+                    adj2[i].push_back({j, adj1[i][j]});
                 }
             }
         }
 
-        // 확인
-        for(int i = 1; i <= N; i++) {
-            if(adj[i][i] < 0) ret = true;
-        }
+        // 벨만 포드
+        for(int i = 0; i < N; i++) {
+            for(int here = 1; here <= N; here++) {
+                for(auto it: adj2[here]) {
+                    long long d = it.second;
+                    int to = it.first;
 
+                    if(dist[here] != INF && dist[here] + d < dist[to]) {
+                        if(i == N-1) ret = true;
+                        dist[to] = dist[here] + d;
+                    }
+                }
+            }   
+        }
+        
         if(ret) cout << "YES\n"; else cout << "NO\n"; 
     }
 }
